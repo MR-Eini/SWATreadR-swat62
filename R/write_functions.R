@@ -25,6 +25,7 @@ write_tbl <- function(tbl, file_path, fmt, add_lines = NULL, write_col_names = T
     fmt <- c(fmt, rep('%s', ncol(tbl) - length(fmt)))
   }
 
+  fmt <- fmt[seq_len(ncol(tbl))]
   tbl <- map2_df(tbl, fmt, ~ sprintf(.y, .x))
 
   if(write_col_names) {

@@ -1,0 +1,10 @@
+{
+  "R": "R version 4.5.2 (2025-10-31 ucrt)",
+  "packages": ["0.1.0.9011", "1.1.0.9018", "0.1.28", "0.3.14"],
+  "legacy_records": 365,
+  "rev62_records": 365,
+  "legacy_mean_runoff": 0.3389,
+  "rev62_mean_runoff": [0.3595, 0.3637],
+  "max_parameter_runoff_change": 0.47,
+  "verification_rows": [114610, 365, 365, 1, 1, 314, 0, 2, 4212, 25284, 314]
+}

@@ -9,7 +9,8 @@ read_tbl(
   col_names = NULL,
   col_types = NULL,
   n_skip = 1,
-  has_unit = FALSE
+  has_unit = FALSE,
+  keep_attr = FALSE
 )
 }
 \arguments{

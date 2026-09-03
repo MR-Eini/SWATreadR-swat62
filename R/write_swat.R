@@ -14,6 +14,16 @@ write_swat <- function(tbl, file_path, overwrite = FALSE) {
 
   write_type <- lookup_write_type(file_name)
 
+    if (file_name == "plants.plt") {
+      write_type$fmt <- rep("%s", ncol(tbl))
+      for (field in intersect(c("days_mat", "yrs_mat"), names(tbl))) {
+        value <- tbl[[field]]
+        if (!is.numeric(value) || any(!is.finite(value) | value != trunc(value))) {
+          stop("plants.plt ", field, " must contain whole numbers.")
+        }
+        write_type$fmt[match(field, names(tbl))] <- "%.0f"
+      }
+    }
   if (file_name %in% list.files(path = dir_path) & overwrite == FALSE) {
     file_name_new <- paste0(file_name, '_repl_', format(Sys.time(), '%Y%m%d%H%m'))
     cat(paste0("Renaming existing file '", file_name, "' to '", file_name_new,"' to avoid overwrite."))
