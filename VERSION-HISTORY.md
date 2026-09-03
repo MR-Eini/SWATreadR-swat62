@@ -28,6 +28,6 @@ Both tags are fixed snapshots. Future versions should receive new version tags; 
 
 ## Tested scope
 
-The updated packages ran the supplied migrated reference model with the Windows Intel SWAT+ revision 62 executable. The supplied verification, discharge calibration/validation, sensitivity, crop and water-yield workflows produced outputs. Sixteen regression cases / 64 expectations pass across the four packages. These results do not establish compatibility for every model, executable or optional process; scientific calibration acceptance has not been achieved.
+The updated packages ran the supplied migrated reference model with the Windows Intel SWAT+ revision 62 executable. The supplied verification, discharge calibration/validation, sensitivity, crop and water-yield workflows produced outputs. The final source test run covered all seven package test directories and passed 78 expectations. These results do not establish compatibility for every model, executable or optional process; scientific calibration acceptance has not been achieved.
 
 See [COMPATIBILITY.md](COMPATIBILITY.md) and [the workflow results](compatibility/workflow-summary.json) for the tests and limitations. Model input migration and updating the old project-generation layer are separate from these package source comparisons.
