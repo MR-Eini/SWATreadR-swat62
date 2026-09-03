@@ -16,4 +16,6 @@ A tibble retaining all named columns and data records.
 Handles revision 62's optional plant and management labels in basin and HRU
 water-balance and plant-weather outputs. HRU labels use the engine's a16/a30
 formats and may have no whitespace separator. Unknown layouts fail explicitly.
+Average annual basin water balance also retains the engine's unlabelled
+calibration fields as \code{cal_sim} and \code{cal_adj}.
 }

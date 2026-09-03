@@ -14,7 +14,7 @@ Windows, R 4.5.2; supplied Mini_setup_CREATE model at commit `f3c8035a697567f419
 - Calibration export includes ordinary and plant-only parameter sets. Maturity fields require whole numbers.
 - Focused tests cover changed control layouts, adjacent fixed-width output labels, date alignment, calibration precision and invalid run indices.
 
-The updated runner and verifier require `SWATreadR >= 0.1.0.9011` from [MR-Eini/SWATreadR-swat62](https://github.com/MR-Eini/SWATreadR-swat62). Install that source package first, then the other packages, into the same R library. These repositories are private development copies; GitHub installation requires access to them. Git clone followed by local R package installation also works.
+The updated runner and verifier require `SWATreadR >= 0.1.0.9012` from [MR-Eini/SWATreadR-swat62](https://github.com/MR-Eini/SWATreadR-swat62). Install that source package first, then the other packages, into the same R library. These repositories are private development copies; GitHub installation requires access to them. Git clone followed by local R package installation also works.
 
 ## Model conversion is a separate step
 
@@ -34,3 +34,11 @@ The legacy and new executables produce different unperturbed mean daily basin ru
 
 Official Intel executable SHA-256: `d680b142b6029762d9a9deeade50494ed0ec5a7e7f68fbace193b2c760f163d0`.
 Official GNU executable SHA-256: `e757daf64a597ca2da80f12ff6a0075c4e8260c6fcf871f8da979aef21a37db3`.
+
+## Full supplied-workflow tests (3 September 2026)
+
+The supplied SWATdoctR verification, SWATrunR execution/storage, and SWATtunR discharge calibration/validation, sensitivity, crop and water-yield workflows were executed on model copies. Three stress-mode runs cover 2004–2023 and read 1,949,626 daily HRU records per mode. Eight discharge samples cover 2007–2015 outputs (3,287 days); two selected validation runs cover 2016–2023 (2,922 days). Eight variables save to SQLite and reload; discharge observations match all evaluation dates. Crop tests use three maturity adjustments, four crop-yield samples and four esco/epco combinations plus check runs. CSV exports, PDF plots and interactive hydrographs were produced locally.
+
+The annual basin output includes unlabelled `cal_sim` (29 characters) and `cal_adj` (17 characters), after its water-balance fields. SWATreadR 0.1.0.9012 reads these without assigning them to crop labels; SWATdoctR uses that reader. SWATtunR warns about observation-only crops and prevents misaligned PHU/yield/biomass panels. Sixteen regression cases / 64 expectations pass, including native annual output and cropped-panel coverage.
+
+These are compatibility tests with small parameter samples. No discharge sample meets the supplied fit thresholds, and channel 6 in the script differs from the observation filename `q_cha5_cms.csv`; gauge mapping needs confirmation. The water-yield check is about 0.334 against target 0.133. `lupn` and `oats` observations have no matching simulated harvests. The selected validation runs are test cases, not accepted calibrated sets. The complete numerical summary is in `compatibility/workflow-summary.json`; full model and observation data stay in the local workspace.

@@ -1,0 +1,20 @@
+test_that("native revision 62 average annual basin output retains calibration metadata", {
+  x <- read_swat_output(test_path("fixtures", "basin_wb_aa.txt"))
+  expect_equal(nrow(x), 1L)
+  expect_equal(ncol(x), 53L)
+  expect_equal(x$yr, 2023L)
+  expect_equal(x$precip, 792.783)
+  expect_equal(x$wet_stor, 0.390)
+  expect_true(is.na(x$plant_cov))
+  expect_true(is.na(x$mgt_ops))
+  expect_equal(x$cal_sim, "Original Simulation")
+  expect_equal(x$cal_adj, 0)
+})
+
+test_that("truncated calibration suffixes fail without discarding rows", {
+  lines <- readLines(test_path("fixtures", "basin_wb_aa.txt"))
+  lines[4L] <- substr(lines[4L], 1L, nchar(lines[4L]) - 2L)
+  path <- file.path(tempdir(), "basin_wb_aa.txt")
+  writeLines(lines, path)
+  expect_error(read_swat_output(path), "Unexpected calibration suffix")
+})
