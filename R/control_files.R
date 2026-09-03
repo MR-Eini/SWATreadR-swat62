@@ -38,6 +38,30 @@ swat_control_set <- function(lines, values) {
   lines
 }
 
+#' Update entries in a named file.cio section
+#'
+#' @param lines Character vector containing file.cio.
+#' @param section Section label, such as `lum` or `climate`.
+#' @param positions Integer entry positions after the section label.
+#' @param values Character replacement values, one for each position.
+#' @return Updated lines, retaining all other sections and entries.
+#' @export
+swat_cio_set <- function(lines, section, positions, values) {
+  tokens <- strsplit(trimws(lines), '[[:space:]]+')
+  idx <- which(vapply(tokens, function(x) identical(x[1L], section), logical(1)))
+  if (length(idx) != 1L) stop('Missing or ambiguous file.cio section: ', section)
+  if (!length(positions) || anyNA(positions) || any(positions < 1L | positions != trunc(positions)) ||
+      anyDuplicated(positions) || length(values) != length(positions) || anyNA(values) ||
+      any(!nzchar(values) | grepl('[[:space:]]', values))) {
+    stop('Provide unique positive entry positions and one nonempty token per value.')
+  }
+  row <- tokens[[idx]]
+  if (max(positions) + 1L > length(row)) stop('Missing entries in file.cio section: ', section)
+  row[positions + 1L] <- values
+  lines[idx] <- paste(row, collapse = ' ')
+  lines
+}
+
 #' Configure SWAT+ object output by name
 #'
 #' Existing object switches are reset to `n`, then requested switches are enabled.

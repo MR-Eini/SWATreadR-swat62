@@ -33,6 +33,10 @@ write_swat <- function(tbl, file_path, overwrite = FALSE) {
   if(is.null(write_type[[1]])) {
     stop("File with the name '", file_name, "' is not supported!")
   } else if (write_type$type == 'tbl') {
+    if (length(write_type$fmt) < ncol(tbl)) {
+      write_type$fmt <- c(write_type$fmt, rep('%s', ncol(tbl) - length(write_type$fmt)))
+    }
+    write_type$fmt <- head(write_type$fmt, ncol(tbl))
     if(!is.null(write_type$add_lines)) {
       if(write_type$add_lines == 'n_row') {
         write_type$add_lines <- as.character(nrow(tbl))

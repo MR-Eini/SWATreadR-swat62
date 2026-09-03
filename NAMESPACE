@@ -51,3 +51,5 @@ importFrom(tidyr,pivot_longer)
 importFrom(tidyr,pivot_wider)
 importFrom(tidyselect,matches)
 importFrom(tidyselect,starts_with)
+
+export(swat_cio_set)
