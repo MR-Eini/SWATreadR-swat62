@@ -1,7 +1,7 @@
 Package: SWATreadR
 Type: Package
 Title: Read and write SWAT+ input and output files.
-Version: 0.1.0.9013
+Version: 0.1.0.9014
 Authors@R: 
     person("Christoph", "Schürz", , "c.schuerz@posteo.org", 
            role = c("aut", "cre"), 
@@ -19,6 +19,7 @@ Imports:
     purrr (>= 1.0.2),
     stringr (>= 1.5.0),
     tibble (>= 3.2.1),
+    tidyr,
     tidyselect (>= 1.2.0)
 Config/roxygen2/version: 8.0.0
 Suggests: testthat (>= 3.0.0)

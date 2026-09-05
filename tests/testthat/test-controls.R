@@ -43,6 +43,36 @@ test_that("revision 62 object-label mode is preserved", {
   expect_equal(result[5], "n y n n")
 })
 
+test_that("revision 62 plant migration keeps every plant row self-contained", {
+  folder <- tempfile(); dir.create(folder)
+  path <- file.path(folder, "plants.plt")
+  header <- c("name", "plnt_typ", "gro_trig", paste0("v", 1:48),
+              "wnd_dead", "wnd_flat")
+  row <- function(name) c(name, "cold_annual", "temp_gro", rep("0", 50))
+  writeLines(c("fixture", paste(header, collapse = " "),
+               paste(row("first"), collapse = " "),
+               paste(row("second"), collapse = " ")), path)
+
+  swat_migrate_plants_rev62(path)
+  migrated <- readLines(path)
+  fields <- strsplit(trimws(migrated[-1]), "[[:space:]]+")
+
+  expect_equal(lengths(fields), c(56L, 56L, 56L))
+  expect_equal(vapply(fields[-1], `[[`, character(1), 1L), c("first", "second"))
+  expect_true(all(c("rsd_pctcov", "rsd_covfac", "avg_lig_frac",
+                    "ab_lig_frac", "bg_lig_frac") %in% fields[[1]]))
+  expect_false(any(c("wnd_dead", "wnd_flat") %in% fields[[1]]))
+
+  once <- migrated
+  swat_migrate_plants_rev62(path)
+  expect_equal(readLines(path), once)
+
+  plants <- read_swat(path)
+  write_swat(plants, path, overwrite = TRUE)
+  roundtrip <- strsplit(trimws(readLines(path)[-1]), "[[:space:]]+")
+  expect_equal(lengths(roundtrip), c(56L, 56L, 56L))
+})
+
 test_that("fixed-width adjacent HRU labels do not truncate output", {
   path <- file.path(tempdir(), "hru_pw_day.txt")
   fields <- c("jday", "mon", "day", "yr", "unit", "gis_id", "name",
