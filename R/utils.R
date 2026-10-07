@@ -134,11 +134,11 @@ vector_to_elements <- function(tbl) {
 #' Convert the information on available runs for the simulated variables into
 #' strings that are printed
 #'
-#' @param tbl overview table that provides meta data for all simulation runs for
-#'   all variables saved in the data bases
+#' @param vals Numeric vector of available element identifiers.
 #'
 #' @importFrom dplyr %>%
 #' @importFrom purrr map map2 map2_chr
+#' @importFrom tibble as_tibble_row
 #' @keywords internal
 #'
 values_to_elements <- function(vals) {

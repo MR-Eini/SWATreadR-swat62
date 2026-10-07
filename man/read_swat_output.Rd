@@ -4,10 +4,13 @@
 \alias{read_swat_output}
 \title{Read a standard SWAT+ text output without discarding records}
 \usage{
-read_swat_output(file_path)
+read_swat_output(file_path, chunk_rows = 10000L)
 }
 \arguments{
 \item{file_path}{Path to a text output with title, names and units rows.}
+
+\item{chunk_rows}{Maximum physical data rows read per chunk (1 to 100000).
+Chunking avoids the single-string limit; the returned table still needs RAM.}
 }
 \value{
 A tibble retaining all named columns and data records.

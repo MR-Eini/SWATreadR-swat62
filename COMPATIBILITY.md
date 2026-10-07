@@ -14,7 +14,7 @@ Windows, R 4.5.2; supplied Mini_setup_CREATE model at commit `f3c8035a697567f419
 - Calibration export includes ordinary and plant-only parameter sets. Maturity fields require whole numbers.
 - Focused tests cover changed control layouts, adjacent fixed-width output labels, date alignment, calibration precision and invalid run indices.
 
-The updated runner and verifier require `SWATreadR >= 0.1.0.9014` from [MR-Eini/SWATreadR-swat62](https://github.com/MR-Eini/SWATreadR-swat62). Install that source package first, then the other packages, into the same R library. These repositories are private development copies; GitHub installation requires access to them. Git clone followed by local R package installation also works.
+The updated runner and verifier require `SWATreadR >= 0.1.0.9015` from [MR-Eini/SWATreadR-swat62](https://github.com/MR-Eini/SWATreadR-swat62). Install that source package first, then the other packages, into the same R library. These are public maintained development forks. Git clone followed by local R package installation also works.
 
 ## Model conversion is a separate step
 

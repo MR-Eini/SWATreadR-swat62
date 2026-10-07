@@ -8,8 +8,7 @@ strings that are printed}
 values_to_elements(vals)
 }
 \arguments{
-\item{tbl}{overview table that provides meta data for all simulation runs for
-all variables saved in the data bases}
+\item{vals}{Numeric vector of available element identifiers.}
 }
 \description{
 Convert the information on available runs for the simulated variables into

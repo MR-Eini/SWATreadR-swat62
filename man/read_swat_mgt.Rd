@@ -4,10 +4,12 @@
 \alias{read_swat_mgt}
 \title{Read SWAT+ management output using its header}
 \usage{
-read_swat_mgt(file_path)
+read_swat_mgt(file_path, chunk_rows = 10000L)
 }
 \arguments{
 \item{file_path}{Path to mgt_out.txt.}
+
+\item{chunk_rows}{Maximum physical data rows read per chunk (1 to 100000).}
 }
 \value{
 A tibble with the engine's column names.
